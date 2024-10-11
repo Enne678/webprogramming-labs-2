@@ -186,7 +186,15 @@ def example():
     lab_number = '2'
     group = 'ФБИ-24'
     course = '3'
-    return render_template('example.html', name=name, lab_number=lab_number, group=group, course=course)
+    fruits = [
+        {'name': 'яблоки', 'price': 100},
+        {'name': 'груши', 'price': 120},
+        {'name': 'апельсины', 'price': 80},
+        {'name': 'мандарины', 'price': 95},
+        {'name': 'манго', 'price': 321}
+    ]
+    return render_template('example.html', name=name, lab_number=lab_number, group=group,
+                            course=course, fruits=fruits)
 
 if __name__ == "__main__":
     app.run(debug=True)
