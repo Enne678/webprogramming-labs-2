@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+<head>
+    <title>Ягоды</title>
+</head>
+<body>
+    <h1>Ягоды</h1>
+    <ul>
+        {% for obj in objects %}
+            <li>
+                <h2>{{ obj.name }}</h2>
+                <p>{{ obj.description }}</p>
+                <img src="{{ url_for('static', filename=obj.image) }}" alt="{{ obj.name }}">
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
