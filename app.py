@@ -163,7 +163,7 @@ def flowers(flower_id):
     if flower_id >= len(flower_list):
         return "такого цветка нет", 404
     else:
-        return "цветок: " + flower_list[flower_id]
+        return render_template('flower.html', flower=flower_list[flower_id])
 
 @app.route('/lab2/add_flower/<name>')
 def add_flower(name):
@@ -199,6 +199,71 @@ def example():
 @app.route('/lab2/')
 def lab():
     return render_template('lab2.html')
+
+@app.route('/lab2/filters')
+def filters():
+    phrase = "О <b>сколько</b> <u>нам</u> <i>открытий</i> чудных..."
+    return render_template('filter.html', phrase = phrase)
+
+@app.route('/lab2/add_flower/')
+def add_flower_missing_name():
+    return "вы не задали имя цветка", 400
+
+@app.route('/lab2/all_flowers')
+def all_flowers():
+    return render_template('all_flowers.html', flowers=flower_list, count=len(flower_list))
+
+@app.route('/lab2/clear_flowers')
+def clear_flowers():
+    global flower_list
+    flower_list = []
+    return redirect(url_for('all_flowers'))
+
+@app.route('/lab2/calc/')
+def calc_default():
+    return redirect('/lab2/calc/1/1')
+
+@app.route('/lab2/calc/<int:a>')
+def calc_single_param(a):
+    return redirect(f'/lab2/calc/{a}/1')
+
+@app.route('/lab2/calc/<int:a>/<int:b>')
+def calc(a, b):
+    result = {
+        'sum': a + b,
+        'subtract': a - b,
+        'multiply': a * b,
+        'divide': a / b if b != 0 else 'undefined',
+        'power': a ** b
+    }
+    return render_template('calc.html', a=a, b=b, result=result)
+
+@app.route('/lab2/books')
+def books():
+    books_list = [
+        {'author': 'Автор 1', 'title': 'Книга 1', 'genre': 'Жанр 1', 'pages': 100},
+        {'author': 'Автор 2', 'title': 'Книга 2', 'genre': 'Жанр 2', 'pages': 150},
+        {'author': 'Автор 3', 'title': 'Книга 3', 'genre': 'Жанр 3', 'pages': 200},
+        {'author': 'Автор 4', 'title': 'Книга 4', 'genre': 'Жанр 4', 'pages': 250},
+        {'author': 'Автор 5', 'title': 'Книга 5', 'genre': 'Жанр 5', 'pages': 300},
+        {'author': 'Автор 6', 'title': 'Книга 6', 'genre': 'Жанр 6', 'pages': 350},
+        {'author': 'Автор 7', 'title': 'Книга 7', 'genre': 'Жанр 7', 'pages': 400},
+        {'author': 'Автор 8', 'title': 'Книга 8', 'genre': 'Жанр 8', 'pages': 450},
+        {'author': 'Автор 9', 'title': 'Книга 9', 'genre': 'Жанр 9', 'pages': 500},
+        {'author': 'Автор 10', 'title': 'Книга 10', 'genre': 'Жанр 10', 'pages': 550}
+    ]
+    return render_template('books.html', books=books_list)
+
+@app.route('/lab2/objects')
+def objects():
+    objects_list = [
+        {'name': 'Ягода 1', 'description': 'Описание ягоды 1', 'image': 'static/berry1.jpg'},
+        {'name': 'Ягода 2', 'description': 'Описание ягоды 2', 'image': 'static/berry2.jpg'},
+        {'name': 'Ягода 3', 'description': 'Описание ягоды 3', 'image': 'static/berry3.jpg'},
+        {'name': 'Ягода 4', 'description': 'Описание ягоды 4', 'image': 'static/berry4.jpg'},
+        {'name': 'Ягода 5', 'description': 'Описание ягоды 5', 'image': 'static/berry5.jpg'}
+    ]
+    return render_template('objects.html', objects=objects_list)
 
 if __name__ == "__main__":
     app.run(debug=True)
