@@ -257,11 +257,11 @@ def books():
 @app.route('/lab2/objects')
 def objects():
     objects_list = [
-        {'name': 'Ягода 1', 'description': 'Описание ягоды 1', 'image': 'static/berry1.jpg'},
-        {'name': 'Ягода 2', 'description': 'Описание ягоды 2', 'image': 'static/berry2.jpg'},
-        {'name': 'Ягода 3', 'description': 'Описание ягоды 3', 'image': 'static/berry3.jpg'},
-        {'name': 'Ягода 4', 'description': 'Описание ягоды 4', 'image': 'static/berry4.jpg'},
-        {'name': 'Ягода 5', 'description': 'Описание ягоды 5', 'image': 'static/berry5.jpg'}
+        {'name': 'Клубника', 'description': 'Сочная и сладкая ягода, идеально подходит для десертов.', 'image': 'strawberry.jpg'},
+        {'name': 'Малина', 'description': 'Ароматная ягода с насыщенным вкусом, отлично подходит для варенья.', 'image': 'raspberry.jpg'},
+        {'name': 'Черника', 'description': 'Полезная и вкусная ягода, богатая витаминами и антиоксидантами.', 'image': 'blueberry.jpg'},
+        {'name': 'Смородина', 'description': 'Кисло-сладкая ягода, прекрасный источник витамина С.', 'image': 'currant.jpg'},
+        {'name': 'Крыжовник', 'description': 'Кисло-сладкая ягода с тонкой кожицей, идеальна для компотов и джемов.', 'image': 'gooseberry.jpg'}
     ]
     return render_template('objects.html', objects=objects_list)
 
