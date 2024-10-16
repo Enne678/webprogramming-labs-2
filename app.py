@@ -1,4 +1,4 @@
-from flask import Flask, redirect, url_for, render_template
+from flask import Flask, redirect, url_for, render_template, request
 app = Flask(__name__)
 
 @app.route("/")
@@ -156,7 +156,12 @@ def a():
 def a2():
     return 'со слэшем'
 
-flower_list = ['роза', 'тюльпан', 'незабудка', 'ромашка']
+flower_list = [
+    {'name': 'роза', 'price': 50},
+    {'name': 'тюльпан', 'price': 30},
+    {'name': 'незабудка', 'price': 20},
+    {'name': 'ромашка', 'price': 10}
+]
 
 @app.route('/lab2/flowers/<int:flower_id>')
 def flowers(flower_id):
@@ -265,6 +270,25 @@ def objects():
     ]
     return render_template('objects.html', objects=objects_list)
 
+@app.route('/lab2/flowers_list')
+def flowers_list():
+    return render_template('all_flowers.html', flowers=flower_list, count=len(flower_list))
+
+@app.route('/lab2/add_new_flower', methods=['POST'])
+def add_new_flower():
+    name = request.form['name']
+    price = request.form['price']
+    flower_list.append({'name': name, 'price': float(price)})
+    return redirect(url_for('flowers_list'))
+
+@app.route('/lab2/delete_specific_flower/<int:flower_id>')
+def delete_specific_flower(flower_id):
+    if flower_id >= len(flower_list):
+        return "такого цветка нет", 404
+    else:
+        flower_list.pop(flower_id)
+        return redirect(url_for('flowers_list'))
+    
 if __name__ == "__main__":
     app.run(debug=True)
 

@@ -1,16 +1,23 @@
 <!doctype html>
 <html>
-<head>
-    <title>Все цветы</title>
-</head>
-<body>
-    <h1>Список всех цветов</h1>
-    <p>Всего цветов: {{ count }}</p>
-    <ul>
-        {% for flower in flowers %}
-            <li>{{ flower }}</li>
-        {% endfor %}
-    </ul>
-    <a href="/lab2/clear_flowers">Очистить список цветов</a>
-</body>
+    <head>
+        <title>Все цветы</title>
+    </head>
+    <body>
+        <h1>Список всех цветов</h1>
+        <p>Всего цветов: {{ count }}</p>
+        <ul>
+            {% for flower in flowers %}
+                <li>{{ flower.name }} - {{ flower.price }} руб. 
+                    <a href="{{ url_for('delete_specific_flower', flower_id=loop.index0) }}">удалить</a>
+                </li>
+            {% endfor %}
+        </ul>
+        <form action="{{ url_for('add_new_flower') }}" method="post">
+            <input type="text" name="name" placeholder="Название цветка" required>
+            <input type="number" name="price" placeholder="Цена" required>
+            <button type="submit">Добавить цветок</button>
+        </form>
+        <a href="/lab2/clear_flowers">Очистить список цветов</a>
+    </body>
 </html>
