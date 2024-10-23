@@ -1,10 +1,17 @@
 <!doctype html>
 <html>
 <head>
-    <title>Цветок</title>
+    <title>Калькулятор</title>
 </head>
 <body>
-    <h1>Цветок: {{ flower }}</h1>
+    <h1>Результаты вычислений для {{ a }} и {{ b }}</h1>
+    <ul>
+        <li>Сумма: {{ result.sum }}</li>
+        <li>Разница: {{ result.subtract }}</li>
+        <li>Умножение: {{ result.multiply }}</li>
+        <li>Деление: {{ result.divide }}</li>
+        <li>Степень: {{ result.power }}</li>
+    </ul>
     <a href="/lab2/all_flowers">Все цветы</a>
 </body>
 </html>
