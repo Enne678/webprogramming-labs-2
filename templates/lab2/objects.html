@@ -10,7 +10,7 @@
             <li>
                 <h2>{{ obj.name }}</h2>
                 <p>{{ obj.description }}</p>
-                <img src="{{ url_for('static', filename=obj.image) }}" alt="{{ obj.name }}">
+                <img src="{{ url_for('static', filename='lab2/' + obj.image) }}" alt="{{ obj.name }}">
             </li>
         {% endfor %}
     </ul>
