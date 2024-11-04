@@ -132,3 +132,37 @@ def ticket():
         return render_template('lab3/ticket.html', fio=fio, bunk=bunk, bedding=bedding, luggage=luggage, age=age, departure=departure, destination=destination, date=date, insurance=insurance, price=price, ticket_type=ticket_type)
     
     return render_template('lab3/ticket_form.html')
+
+cars = [
+    {'name': 'Toyota Camry', 'price': 2500000, 'color': 'White', 'brand': 'Toyota'},
+    {'name': 'Honda Accord', 'price': 2400000, 'color': 'Black', 'brand': 'Honda'},
+    {'name': 'BMW 3 Series', 'price': 3500000, 'color': 'Blue', 'brand': 'BMW'},
+    {'name': 'Audi A4', 'price': 4000000, 'color': 'Red', 'brand': 'Audi'},
+    {'name': 'Mercedes-Benz C-Class', 'price': 4200000, 'color': 'Silver', 'brand': 'Mercedes-Benz'},
+    {'name': 'Ford Fusion', 'price': 2200000, 'color': 'Gray', 'brand': 'Ford'},
+    {'name': 'Chevrolet Malibu', 'price': 2100000, 'color': 'White', 'brand': 'Chevrolet'},
+    {'name': 'Nissan Altima', 'price': 2300000, 'color': 'Black', 'brand': 'Nissan'},
+    {'name': 'Hyundai Sonata', 'price': 2400000, 'color': 'Blue', 'brand': 'Hyundai'},
+    {'name': 'Kia Optima', 'price': 2350000, 'color': 'Red', 'brand': 'Kia'},
+    {'name': 'Mazda 6', 'price': 2700000, 'color': 'Silver', 'brand': 'Mazda'},
+    {'name': 'Subaru Legacy', 'price': 2600000, 'color': 'Gray', 'brand': 'Subaru'},
+    {'name': 'Volkswagen Passat', 'price': 2800000, 'color': 'White', 'brand': 'Volkswagen'},
+    {'name': 'Lexus ES', 'price': 4500000, 'color': 'Black', 'brand': 'Lexus'},
+    {'name': 'Infiniti Q50', 'price': 4300000, 'color': 'Blue', 'brand': 'Infiniti'},
+    {'name': 'Acura TLX', 'price': 3600000, 'color': 'Red', 'brand': 'Acura'},
+    {'name': 'Tesla Model 3', 'price': 5000000, 'color': 'White', 'brand': 'Tesla'},
+    {'name': 'Cadillac CT5', 'price': 4700000, 'color': 'Black', 'brand': 'Cadillac'},
+    {'name': 'Jaguar XE', 'price': 4800000, 'color': 'Blue', 'brand': 'Jaguar'},
+    {'name': 'Volvo S60', 'price': 4600000, 'color': 'Red', 'brand': 'Volvo'}
+]
+
+@lab3.route('/lab3/search', methods=['GET', 'POST'])
+def search():
+    if request.method == 'POST':
+        min_price = int(request.form['min_price'])
+        max_price = int(request.form['max_price'])
+
+        filtered_cars = [car for car in cars if min_price <= car['price'] <= max_price]
+
+        return render_template('lab3/search_results.html', cars=filtered_cars, min_price=min_price, max_price=max_price)
+    return render_template('lab3/search_form.html')

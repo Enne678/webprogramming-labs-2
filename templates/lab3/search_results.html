@@ -1,0 +1,15 @@
+<!doctype html>
+<html>
+<head>
+    <title>Результаты поиска</title>
+</head>
+<body>
+    <h1>Результаты поиска автомобилей</h1>
+    <p>Ценовой диапазон: от {{ min_price }} до {{ max_price }} руб.</p>
+    <ul>
+        {% for car in cars %}
+            <li>{{ car.name }} - {{ car.price }} руб. - {{ car.color }} - {{ car.brand }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>
