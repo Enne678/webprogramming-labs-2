@@ -48,12 +48,11 @@ def example():
         {'name': 'мандарины', 'price': 95},
         {'name': 'манго', 'price': 321}
     ]
-    return render_template('example.html', name=name, lab_number=lab_number, group=group,
-                           course=course, fruits=fruits)
+    return render_template('lab2/example.html', name=name, lab_number=lab_number, group=group, course=course, fruits=fruits)
 
 @lab2.route('/lab2/')
 def lab():
-    return render_template('lab2.html')
+    return render_template('lab2/lab2.html')
 
 @lab2.route('/lab2/filters')
 def filters():
@@ -66,7 +65,7 @@ def add_flower_missing_name():
 
 @lab2.route('/lab2/all_flowers')
 def all_flowers():
-    return render_template('all_flowers.html', flowers=flower_list, count=len(flower_list))
+    return render_template('lab2/all_flowers.html', flowers=flower_list, count=len(flower_list))
 
 @lab2.route('/lab2/clear_flowers')
 def clear_flowers():
@@ -91,7 +90,7 @@ def calc(a, b):
         'divide': a / b if b != 0 else 'undefined',
         'power': a ** b
     }
-    return render_template('calc.html', a=a, b=b, result=result)
+    return render_template('lab2/calc.html', a=a, b=b, result=result)
 
 @lab2.route('/lab2/books')
 def books():
@@ -107,7 +106,7 @@ def books():
         {'author': 'Автор 9', 'title': 'Книга 9', 'genre': 'Жанр 9', 'pages': 500},
         {'author': 'Автор 10', 'title': 'Книга 10', 'genre': 'Жанр 10', 'pages': 550}
     ]
-    return render_template('books.html', books=books_list)
+    return render_template('lab2/books.html', books=books_list)
 
 @lab2.route('/lab2/objects')
 def objects():
@@ -118,7 +117,7 @@ def objects():
         {'name': 'Смородина', 'description': 'Кисло-сладкая ягода, прекрасный источник витамина С.', 'image': 'currant.jpg'},
         {'name': 'Крыжовник', 'description': 'Кисло-сладкая ягода с тонкой кожицей, идеальна для компотов и джемов.', 'image': 'gooseberry.jpg'}
     ]
-    return render_template('objects.html', objects=objects_list)
+    return render_template('lab2/objects.html', objects=objects_list)
 
 @lab2.route('/lab2/flowers_list')
 def flowers_list():
@@ -138,3 +137,4 @@ def delete_specific_flower(flower_id):
     else:
         flower_list.pop(flower_id)
         return redirect(url_for('lab2.flowers_list'))
+
