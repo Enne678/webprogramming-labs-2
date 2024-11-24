@@ -238,3 +238,66 @@ def grain_order():
         return render_template('lab4/grain-order.html', message=message, discount_message=discount_message)
     
     return render_template('lab4/grain-order.html')
+
+@lab4.route('/lab4/register', methods=['GET', 'POST'])
+def register():
+    if request.method == 'POST':
+        login = request.form.get('login')
+        password = request.form.get('password')
+        name = request.form.get('name')
+
+        if not login or not password or not name:
+            error = 'Все поля должны быть заполнены'
+            return render_template('lab4/register.html', error=error)
+
+        for user in users:
+            if user['login'] == login:
+                error = 'Логин уже используется'
+                return render_template('lab4/register.html', error=error)
+        
+        new_user = {'login': login, 'password': password, 'name': name, 'gender': 'Не указан'}
+        users.append(new_user)
+        return redirect('/lab4/login')
+
+    return render_template('lab4/register.html')
+
+@lab4.route('/lab4/users', methods=['GET'])
+def users_list():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    return render_template('lab4/users.html', users=users)
+
+@lab4.route('/lab4/user/edit', methods=['GET', 'POST'])
+def edit_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    login = session['login']
+    user = next((user for user in users if user['login'] == login), None)
+    
+    if request.method == 'POST':
+        new_name = request.form.get('name')
+        new_password = request.form.get('password')
+
+        if user:
+            user['name'] = new_name
+            if new_password:
+                user['password'] = new_password
+            return redirect('/lab4/users')
+
+    return render_template('lab4/edit_user.html', user=user)
+
+@lab4.route('/lab4/user/delete', methods=['POST'])
+def delete_user():
+    if 'login' not in session:
+        return redirect('/lab4/login')
+
+    login = session.pop('login')
+
+    for user in users:
+        if user['login'] == login:
+            users.remove(user)
+            break
+
+    return redirect('/lab4/login')

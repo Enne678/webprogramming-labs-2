@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block lab %}Список пользователей{% endblock %}
+
+{% block main %}
+<h1>Список пользователей</h1>
+<ul>
+    {% for user in users %}
+        <li>{{ user.name }} ({{ user.login }})
+            {% if session.login == user.login %}
+                <form action="/lab4/user/edit" method="get" style="display:inline;">
+                    <button>Редактировать</button>
+                </form>
+                <form action="/lab4/user/delete" method="post" style="display:inline;">
+                    <button>Удалить</button>
+                </form>
+            {% endif %}
+        </li>
+    {% endfor %}
+</ul>
+{% endblock %}
