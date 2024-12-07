@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 5{% endblock %}
+
+{% block main %}
+<h1>База знаний</h1>
+<div style="background-color: #e0f7fa; padding: 10px;">
+    <button onclick="location.href='/lab5/list'" style="margin-right: 10px;">Список статей</button>
+    <button onclick="location.href='/lab5/create'" style="margin-right: 10px;">Создать статью</button>
+    <button onclick="location.href='/lab5/login'" style="margin-right: 10px;">Войти</button>
+    <button onclick="location.href='/lab5/register'" style="margin-right: 10px;">Регистрация</button>
+    <span style="float: right;">{{ username }}</span>
+</div>
+{% endblock %}
