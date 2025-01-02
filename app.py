@@ -7,6 +7,8 @@ from lab5 import lab5
 
 app = Flask(__name__)
 
+app.config['JSON_AS_ASCII'] = False
+
 app.secret_key = 'секретно-секретный секрет'
 app.register_blueprint(lab1)
 app.register_blueprint(lab2)

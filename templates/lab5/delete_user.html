@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block lab %}Лабораторная работа 5{% endblock %}
+
+{% block main %}
+    <h1>Удаление пользователя</h1>
+    <form action="/lab5/delete_user" method="post">
+        <div>
+            <label>
+                Логин пользователя для удаления:
+                <input type="text" name="user_to_delete" required>
+            </label>
+        </div>
+        <div>
+            <button type="submit">Удалить</button>
+        </div>
+    </form>
+{% endblock %}

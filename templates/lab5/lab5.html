@@ -9,6 +9,22 @@
     <button onclick="location.href='/lab5/create'" style="margin-right: 10px;">Создать статью</button>
     <button onclick="location.href='/lab5/login'" style="margin-right: 10px;">Войти</button>
     <button onclick="location.href='/lab5/register'" style="margin-right: 10px;">Регистрация</button>
-    <span style="float: right;">{{ login }}</span>
+    <a href="/lab5/delete_user">Удалить пользователя</a>
+    <span style="float: right;">{{ login if login else "Гость" }}</span>
 </div>
+
+{% if articles %}
+    <h2>Ваши статьи</h2>
+    {% for article in articles %}
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <h3>{{ article['title'] }}</h3>
+            <p>{{ article['article_text'] }}</p>
+            <form action="{{ url_for('lab5.delete_article', article_id=article['id']) }}" method="post" style="display: inline;">
+                <button type="submit" style="background-color: #ff4444; color: white; border: none; padding: 5px 10px; cursor: pointer;">Удалить</button>
+            </form>
+        </div>
+    {% endfor %}
+{% else %}
+    <p>У вас пока нет статей.</p>
+{% endif %}
 {% endblock %}
